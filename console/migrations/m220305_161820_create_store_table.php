@@ -5,7 +5,7 @@ use yii\db\Migration;
 /**
  * Handles the creation of table `{{%store}}`.
  */
-class m220305_171820_create_store_table extends Migration
+class m220305_161820_create_store_table extends Migration
 {
     /**
      * {@inheritdoc}
@@ -15,7 +15,8 @@ class m220305_171820_create_store_table extends Migration
         $this->createTable('{{%store}}', [
             'id' => $this->primaryKey(),
             'name' => $this->string()->notNull()->unique(),
-            'created_at' => $this->integer()->notNull(),
+            'created_at' => $this->dateTime(),
+            'updated_at' => $this->dateTime(),
         ]);
     }
 

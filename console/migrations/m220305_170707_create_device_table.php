@@ -1,5 +1,4 @@
 <?php
-
 use yii\db\Migration;
 
 /**
@@ -14,10 +13,21 @@ class m220305_170707_create_device_table extends Migration
     {
         $this->createTable('{{%device}}', [
             'id' => $this->primaryKey(),
-            'sn' => $this->string(32)->notNull()->unique(),
+            'serial' => $this->string()->notNull()->unique(),
             'store_id' => $this->integer(),
-            'created_at' => $this->integer()->notNull(),
+            'created_at' => $this->dateTime(),
+            'updated_at' => $this->dateTime(),
         ]);
+
+        $this->addForeignKey(
+            'fk-device-store_id',
+            'device',
+            'store_id',
+            'store',
+            'id',
+            'SET NULL',
+            'CASCADE',
+        );
     }
 
     /**
@@ -25,6 +35,11 @@ class m220305_170707_create_device_table extends Migration
      */
     public function down()
     {
+        $this->dropForeignKey(
+            'fk-device-store_id',
+            'device'
+        );
+
         $this->dropTable('{{%device}}');
     }
 }

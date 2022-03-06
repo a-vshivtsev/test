@@ -33,12 +33,13 @@ class SiteController extends Controller
                 'rules' => [
                     [
                         //'actions' => ['signup'],
-                        'actions' => ['login', 'error'],
+                        //'action' => ['index'],
+                        'actions' => ['login', 'error','signup', 'about', 'contact'],
                         'allow' => true,
                         'roles' => ['?'],
                     ],
                     [
-                        'actions' => ['logout', 'index'],
+                        'actions' => ['logout', 'index','about', 'contact'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
