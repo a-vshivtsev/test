@@ -20,7 +20,7 @@ class m220305_170707_create_device_table extends Migration
         ]);
 
         $this->addForeignKey(
-            'fk-device-store_id',
+            'fk-device-store_id-store-id',
             'device',
             'store_id',
             'store',
@@ -36,7 +36,7 @@ class m220305_170707_create_device_table extends Migration
     public function down()
     {
         $this->dropForeignKey(
-            'fk-device-store_id',
+            'fk-device-store_id-store-id',
             'device'
         );
 
