@@ -4,6 +4,7 @@ namespace frontend\controllers;
 
 use common\models\Store;
 use common\models\search\StoreSearch;
+use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -38,7 +39,7 @@ class StoreController extends Controller
                             'roles' => ['?'],
                         ],
                         [
-                            'actions' => ['logout', 'index','view', 'create', 'update', 'delete','viewall'],
+                            'actions' => ['logout', 'index','view', 'create', 'update', 'delete'],
                             'allow' => true,
                             'roles' => ['@'],
                         ],
@@ -130,11 +131,7 @@ class StoreController extends Controller
     {
         $this->findModel($id)->delete();
 
-        return $this->redirect(['index']);
-    }
-    public function actionViewall ($id){
-
-    }
+        return $this->redirect(['index']);    }
 
 
     /**

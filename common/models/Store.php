@@ -2,8 +2,9 @@
 
 namespace common\models;
 
-use Yii;
 use yii\behaviors\TimestampBehavior;
+use yii\db\BaseActiveRecord;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "store".
@@ -31,18 +32,15 @@ class Store extends \yii\db\ActiveRecord
             'timestamp' => [
                 'class' => TimestampBehavior::className(),
                 'attributes' => [
-                    \yii\db\BaseActiveRecord::EVENT_BEFORE_INSERT => ['created_at'],
-                    \yii\db\BaseActiveRecord::EVENT_BEFORE_UPDATE => ['updated_at'],
+                    BaseActiveRecord::EVENT_BEFORE_INSERT => ['created_at'],
+                    BaseActiveRecord::EVENT_BEFORE_UPDATE => ['updated_at'],
                 ],
                 //'value' => new \yii\db\Expression('NOW()'),
                 'value' => function()
                 {
                     return gmdate("Y-m-d H:i:s");
                 },
-
-
             ],
-
         ];
     }
 
@@ -75,7 +73,7 @@ class Store extends \yii\db\ActiveRecord
 
     public static function getList()
     {
-        return \yii\helpers\ArrayHelper::map(\common\models\Store::find()->all(), 'id', 'name');
+        return ArrayHelper::map(\common\models\Store::find()->all(), 'id', 'name');
     }
 
     public function getDevice()

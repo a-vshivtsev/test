@@ -5,11 +5,9 @@ use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\ActionColumn;
-
-//use yii\grid\GridView;
 use kartik\grid\GridView;
 use kartik\select2\Select2;
-use yii\widgets\Pjax;
+
 
 /* @var $this yii\web\View */
 /* @var $searchModel common\models\search\DeviceSearch */
@@ -27,7 +25,6 @@ $this->params['breadcrumbs'][] = $this->title;
     </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-    <?php Pjax::begin(); ?>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -40,8 +37,6 @@ $this->params['breadcrumbs'][] = $this->title;
                 'value' => function ($model) {
                     return $model->storeName;
                 },
-                //'value' => 'storename.name',
-                //'filter' => \common\models\Store::getList()],
                 'filter' => Select2::widget([
                     'model' => $searchModel,
                     'attribute' => 'store_id',
@@ -69,8 +64,6 @@ $this->params['breadcrumbs'][] = $this->title;
         'hover' => true,
         'resizableColumns' => true,
     ]); ?>
-
-    <?php Pjax::end(); ?>
 
 
 </div>

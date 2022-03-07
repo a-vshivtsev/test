@@ -1,9 +1,10 @@
 <?php
 
 namespace frontend\controllers;
-
 use common\models\Device;
 use common\models\search\DeviceSearch;
+use Yii;
+use yii\data\ActiveDataProvider;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -38,14 +39,12 @@ class DeviceController extends Controller
                             'roles' => ['?'],
                         ],
                         [
-                            'actions' => ['logout', 'index', 'view', 'create', 'update', 'delete'],
+                            'actions' => ['logout', 'index', 'view', 'create', 'update', 'delete', 'list', 'search'],
                             'allow' => true,
                             'roles' => ['@'],
                         ],
                     ],
                 ],
-
-
             ]
         );
     }
@@ -134,6 +133,30 @@ class DeviceController extends Controller
 
         return $this->redirect(['index']);
     }
+
+    /**
+     * Displays all Device Models from Store Model.
+     * If request is ajax, return dataprovider object response.
+     * @param int $id ID Store
+     * @return string
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+
+    public function actionList($id)
+    {
+        if (Yii::$app->request->isAjax) {
+
+           $dataProvider = new ActiveDataProvider([
+                'query' => Device::find()->where(['store_id' => $id]),
+                 'pagination' => [
+                   'pageSize' => 20,
+                 ],
+            ]);
+
+           return $this->renderAjax('list', ['dataProvider' => $dataProvider]);
+        }
+    }
+
 
     /**
      * Finds the Device model based on its primary key value.
